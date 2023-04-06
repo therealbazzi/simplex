@@ -75,26 +75,20 @@ for i = 1:nConstraints
         case '<='
             v_e = [v_e b(i)];
             A1(i,length(v_e)) = 1;
-            
+            A2(i,:) = 0;
         case '>='
             v_e = [v_e 0];
             A1(i,length(v_e)) = -1;
             v_ari =[v_ari b(i)];
             A2(i,length(v_ari)) = 1;
-            
         case '='
             v_ari =[v_ari b(i)];
             A2(i,length(v_ari)) = 1;
+            A1(i,:) = 0;
     end
     v_b=[v_b b(i)];
 end
-% try
-% A =[A A1 A2];
-% catch
-%    if size(A1,1) < size(A2,1)
-%       A = [A [A1;zeros(size(A2,1)-size(A1,1),size(A1,2))] A2]; 
-%    end
-% end
+
 A = [A A1 A2]; 
 vari = [];
 vari_ar = []; %artificials (surplus)
